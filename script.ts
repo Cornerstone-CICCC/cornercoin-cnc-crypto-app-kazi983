@@ -1,17 +1,17 @@
 class Account {
   private userName: string;
-  private _history: Transaction[] = [];
+  private history: Transaction[] = [];
 
   constructor(userName: string) {
     this.userName = userName;
   }
 
   get balance() {
-    return this._history.reduce((sum, tran) => sum + tran.value, 500);
+    return this.history.reduce((sum, tran) => sum + tran.value, 500);
   }
 
-  set history(tran: Transaction) {
-    this._history.push(tran);
+  addTransactions(tran: Transaction) {
+    this.history.push(tran);
   }
 }
 
@@ -40,7 +40,7 @@ class Transaction {
       return false;
     }
 
-    this.account.history = this;
+    this.account.addTransactions(this);
     return true;
   }
 }
