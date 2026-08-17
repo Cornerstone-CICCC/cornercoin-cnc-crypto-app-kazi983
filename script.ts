@@ -19,29 +19,23 @@ class Account {
   }
 }
 
-class Withdrawal {
-  private account: Account;
-  private amount: number;
+class Transaction {
+  protected account: Account;
+  protected amount: number;
 
   constructor(account: Account, amount: number) {
     this.account = account;
     this.amount = amount;
   }
+}
 
+class Withdrawal extends Transaction {
   commit() {
     this.account.withdrawal(this.amount);
   }
 }
 
-class Deposit {
-  private account: Account;
-  private amount: number;
-
-  constructor(account: Account, amount: number) {
-    this.account = account;
-    this.amount = amount;
-  }
-
+class Deposit extends Transaction {
   commit() {
     this.account.deposit(this.amount);
   }
