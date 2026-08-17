@@ -1,13 +1,13 @@
 class Account {
   private userName: string;
-  public _balance: number = 500.0;
+  public history: number[] = [500.0];
 
   constructor(userName: string) {
     this.userName = userName;
   }
 
   get balance() {
-    return this._balance;
+    return this.history.reduce((sum, value) => sum + value, 0);
   }
 }
 
@@ -25,7 +25,7 @@ class Transaction {
   }
 
   commit() {
-    this.account._balance += this.value;
+    this.account.history.push(this.value);
   }
 }
 
@@ -69,3 +69,5 @@ console.log(
   myAccount.balance,
   `(correct output: ${500 - 50.25 - 9.99 + 120})`,
 );
+
+console.log('myAccount :>> ', myAccount);

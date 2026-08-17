@@ -2,12 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class Account {
     userName;
-    _balance = 500.0;
+    history = [500.0];
     constructor(userName) {
         this.userName = userName;
     }
     get balance() {
-        return this._balance;
+        return this.history.reduce((sum, value) => sum + value, 0);
     }
 }
 class Transaction {
@@ -21,7 +21,7 @@ class Transaction {
         return this.amount;
     }
     commit() {
-        this.account._balance += this.value;
+        this.account.history.push(this.value);
     }
 }
 class Withdrawal extends Transaction {
@@ -49,3 +49,4 @@ const t3 = new Deposit(myAccount, 120.0);
 t3.commit();
 // console.log('Transaction 3:', t3);
 console.log('Balance:', myAccount.balance, `(correct output: ${500 - 50.25 - 9.99 + 120})`);
+console.log('myAccount :>> ', myAccount);
