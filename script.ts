@@ -1,6 +1,6 @@
 class Account {
   private userName: string;
-  protected _balance: number = 500.0;
+  public _balance: number = 500.0;
 
   constructor(userName: string) {
     this.userName = userName;
@@ -8,14 +8,6 @@ class Account {
 
   get balance() {
     return this._balance;
-  }
-
-  withdrawal(amount: number) {
-    this._balance -= amount;
-  }
-
-  deposit(amount: number) {
-    this._balance += amount;
   }
 }
 
@@ -27,19 +19,23 @@ class Transaction {
     this.account = account;
     this.amount = amount;
   }
+
+  get value() {
+    return this.amount;
+  }
+
+  commit() {
+    this.account._balance += this.value;
+  }
 }
 
 class Withdrawal extends Transaction {
-  commit() {
-    this.account.withdrawal(this.amount);
+  get value() {
+    return -this.amount;
   }
 }
 
-class Deposit extends Transaction {
-  commit() {
-    this.account.deposit(this.amount);
-  }
-}
+class Deposit extends Transaction {}
 
 /*************************************
  *

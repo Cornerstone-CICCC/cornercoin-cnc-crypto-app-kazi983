@@ -9,12 +9,6 @@ class Account {
     get balance() {
         return this._balance;
     }
-    withdrawal(amount) {
-        this._balance -= amount;
-    }
-    deposit(amount) {
-        this._balance += amount;
-    }
 }
 class Transaction {
     account;
@@ -23,16 +17,19 @@ class Transaction {
         this.account = account;
         this.amount = amount;
     }
+    get value() {
+        return this.amount;
+    }
+    commit() {
+        this.account._balance += this.value;
+    }
 }
 class Withdrawal extends Transaction {
-    commit() {
-        this.account.withdrawal(this.amount);
+    get value() {
+        return -this.amount;
     }
 }
 class Deposit extends Transaction {
-    commit() {
-        this.account.deposit(this.amount);
-    }
 }
 /*************************************
  *
