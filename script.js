@@ -2,12 +2,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class Account {
     userName;
-    history = [];
+    _history = [];
     constructor(userName) {
         this.userName = userName;
     }
     get balance() {
-        return this.history.reduce((sum, tran) => sum + tran.value, 500);
+        return this._history.reduce((sum, tran) => sum + tran.value, 500);
+    }
+    set history(tran) {
+        this._history.push(tran);
     }
 }
 class Transaction {
@@ -28,7 +31,7 @@ class Transaction {
             console.log(`You don't have enough balance (your current balance: ${this.account.balance})`);
             return false;
         }
-        this.account.history.push(this);
+        this.account.history = this;
         return true;
     }
 }
