@@ -1,5 +1,14 @@
 let balance = 500.0;
 
+class Account {
+  private userName: string;
+  private balance?: number;
+
+  constructor(userName: string) {
+    this.userName = userName;
+  }
+}
+
 class Withdrawal {
   private amount: number;
   constructor(amount: number) {
@@ -45,3 +54,10 @@ t3.commit();
 console.log('Transaction 3:', t3);
 
 console.log('Balance:', balance);
+
+/**
+ * Test code for Step 2
+ */
+
+const myAccount = new Account('snow-patrol');
+console.log('myAccount:', myAccount);

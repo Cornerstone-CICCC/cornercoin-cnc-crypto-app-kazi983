@@ -1,6 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 let balance = 500.0;
+class Account {
+    userName;
+    balance;
+    constructor(userName) {
+        this.userName = userName;
+    }
+}
 class Withdrawal {
     amount;
     constructor(amount) {
@@ -36,3 +43,8 @@ const t3 = new Deposit(120.0);
 t3.commit();
 console.log('Transaction 3:', t3);
 console.log('Balance:', balance);
+/**
+ * Test code for Step 2
+ */
+const myAccount = new Account('snow-patrol');
+console.log('myAccount:', myAccount);
