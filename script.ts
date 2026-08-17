@@ -29,7 +29,7 @@ class Transaction {
   }
 
   isAllowed() {
-    return this.account.balance + this.value >= 0;
+    return true;
   }
 
   commit() {
@@ -49,9 +49,17 @@ class Withdrawal extends Transaction {
   get value() {
     return -this.amount;
   }
+
+  isAllowed() {
+    return this.account.balance + this.value >= 0;
+  }
 }
 
-class Deposit extends Transaction {}
+class Deposit extends Transaction {
+  isAllowed() {
+    return true;
+  }
+}
 
 /*************************************
  *
