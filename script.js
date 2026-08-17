@@ -20,8 +20,16 @@ class Transaction {
     get value() {
         return this.amount;
     }
+    isAllowed() {
+        return this.account.balance + this.value >= 0;
+    }
     commit() {
+        if (!this.isAllowed()) {
+            console.log(`You don't have enough balance (your current balance: ${this.account.balance})`);
+            return false;
+        }
         this.account.history.push(this.value);
+        return true;
     }
 }
 class Withdrawal extends Transaction {
@@ -49,4 +57,7 @@ const t3 = new Deposit(myAccount, 120.0);
 t3.commit();
 // console.log('Transaction 3:', t3);
 console.log('Balance:', myAccount.balance, `(correct output: ${500 - 50.25 - 9.99 + 120})`);
+const t4 = new Withdrawal(myAccount, 600);
+t4.commit();
 console.log('myAccount :>> ', myAccount);
+console.log('Balance   :>> ', myAccount.balance);
